@@ -465,19 +465,6 @@ var CSG = (function() {
             // a.invert(); 
             return CSG.FromPolygons(a.allPolygons()).copyTransformAttributes(this);
         },
-        // subtract: function(csg) {
-        //     var a = new Node(this.clone().polygons);
-        //     var b = new Node(csg.clone().polygons);
-        //     b.invert();
-        //     a.clipTo(b);
-        //     b.clipTo(a);
-        //     a.invert();
-        //     a.clipTo(b);
-        //     a.invert();
-        //     b.build(a.allPolygons());
-        //     // b.invert(); 
-        //     return CSG.FromPolygons(b.allPolygons()).copyTransformAttributes(this);
-        // },
         subtractInPlace: function(csg) {
             var a = new Node(this.polygons);
             var b = new Node(csg.polygons);
@@ -601,7 +588,6 @@ var CSG = (function() {
                 uvs     : uvs,
                 indices : indices
             };
-            // console.log(vertices);
             
             mesh = pc.createMesh(pc.app.graphicsDevice, vertices, options);
           
@@ -639,157 +625,7 @@ var CSG = (function() {
             e.addComponent('model');
             e.model.model = model;
             
-            // e.name = ii+"";
-            // e.setPosition(0,0,ii);
-            // ii++;
-            // pc.app.root.children[0].addChild(e);
-            
-            // this.entity.model.model.setGraph(node);
-            // this.entity.model.meshInstances = [meshInstance];
         }
     };
     return CSG;
 }());
-
-// CSG.Vector3D.prototype = {
-//   get x() {
-//     return this._x;
-//   },
-//   get y() {
-//     return this._y;
-//   },
-//   get z() {
-//     return this._z;
-//   },
-  
-//   set x(v) {
-//     throw new Error("Vector3D is immutable");
-//   },
-//   set y(v) {
-//     throw new Error("Vector3D is immutable");
-//   },
-//   set z(v) {
-//     throw new Error("Vector3D is immutable");
-//   },
-  
-//   clone: function() {
-//     return new CSG.Vector3D(this);
-//   },
-
-//   negated: function() {
-//     return new CSG.Vector3D(-this._x, -this._y, -this._z);
-//   },
-
-//   abs: function() {
-//     return new CSG.Vector3D(Math.abs(this._x), Math.abs(this._y), Math.abs(this._z));
-//   },
-
-//   plus: function(a) {
-//     return new CSG.Vector3D(this._x + a._x, this._y + a._y, this._z + a._z);
-//   },
-
-//   minus: function(a) {
-//     return new CSG.Vector3D(this._x - a._x, this._y - a._y, this._z - a._z);
-//   },
-
-//   times: function(a) {
-//     return new CSG.Vector3D(this._x * a, this._y * a, this._z * a);
-//   },
-
-//   dividedBy: function(a) {
-//     return new CSG.Vector3D(this._x / a, this._y / a, this._z / a);
-//   },
-
-//   dot: function(a) {
-//     return this._x * a._x + this._y * a._y + this._z * a._z;
-//   },
-
-//   lerp: function(a, t) {
-//     return this.plus(a.minus(this).times(t));
-//   },
-
-//   lengthSquared: function() {
-//     return this.dot(this);
-//   },
-
-//   length: function() {
-//     return Math.sqrt(this.lengthSquared());
-//   },
-
-//   unit: function() {
-//     return this.dividedBy(this.length());
-//   },
-
-//   cross: function(a) {
-//     return new CSG.Vector3D(
-//       this._y * a._z - this._z * a._y,
-//       this._z * a._x - this._x * a._z,
-//       this._x * a._y - this._y * a._x
-//     );
-//   },
-  
-//   distanceTo: function(a) {
-//     return this.minus(a).length();
-//   },
-
-//   distanceToSquared: function(a) {
-//     return this.minus(a).lengthSquared();
-//   },
-
-//   equals: function(a) {
-//     return (this._x == a._x) && (this._y == a._y) && (this._z == a._z);
-//   },
-  
-//   // Right multiply by a 4x4 matrix (the vector is interpreted as a row vector)
-//   // Returns a new CSG.Vector3D
-//   multiply4x4: function(matrix4x4) {
-//     return matrix4x4.leftMultiply1x3Vector(this);
-//   },
-  
-//   transform: function(matrix4x4) {
-//     return matrix4x4.leftMultiply1x3Vector(this);
-//   },
-  
-//   toStlString: function() {
-//     return this._x+" "+this._y+" "+this._z;
-//   },
-
-//   toString: function() {
-//     return "("+this._x+", "+this._y+", "+this._z+")";
-//   },
-  
-//   // find a vector that is somewhat perpendicular to this one
-//   randomNonParallelVector: function() {
-//     var abs = this.abs();
-//     if( (abs._x <= abs._y) && (abs._x <= abs._z) )
-//     {
-//       return new CSG.Vector3D(1,0,0);
-//     }
-//     else if( (abs._y <= abs._x) && (abs._y <= abs._z) )
-//     {
-//       return new CSG.Vector3D(0,1,0);
-//     }
-//     else
-//     {
-//       return new CSG.Vector3D(0,0,1);
-//     }
-//   },
-  
-//   min: function(p) {
-//     return new CSG.Vector3D(
-//       Math.min(this._x, p._x),
-//       Math.min(this._y, p._y),
-//       Math.min(this._z, p._z)
-//     );
-//   },
-  
-//   max: function(p) {
-//     return new CSG.Vector3D(
-//       Math.max(this._x, p._x),
-//       Math.max(this._y, p._y),
-//       Math.max(this._z, p._z)
-//     );
-//   },
-// };
-            
-var ii = 0;
